@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.Arrays; // Tambahan untuk mencetak array dengan format [a, b, c]
+import java.util.Arrays;
 
 public class Moriohs_Hidden_Danger {
     public static void main(String[] args){
@@ -11,17 +11,13 @@ public class Moriohs_Hidden_Danger {
         String NamadanBulan = sc.nextLine();
         String[] pemisah = NamadanBulan.split(" ");
 
-        // 1. Memasukkan input ke Stack Pertama (Sesuai Constraint 2)
         for(int i = 0; i < pemisah.length; i++){
             Input.push(pemisah[i]);
         }
-
-        // 2. Mengeluarkan isi Stack dan membuat objek Pasangan
         Pasangan[] daftarPasangan = new Pasangan[pemisah.length / 2];
         int index = 0;
         
         while(!Input.isEmpty()){
-            // Karena LIFO, yang keluar duluan adalah bulan, baru nama
             String bulan = Input.pop();
             String nama = Input.pop();
 
@@ -29,40 +25,30 @@ public class Moriohs_Hidden_Danger {
             daftarPasangan[index] = p;
             index++;
         }
-
-        // 3. Mengurutkan array menggunakan Bubble Sort (Bulan 1 sampai 12)
         int n = daftarPasangan.length;
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (daftarPasangan[j].getUrutanBulan() > daftarPasangan[j + 1].getUrutanBulan()) {
-                    // Proses Swap (Tukar posisi)
                     Pasangan temp = daftarPasangan[j];
                     daftarPasangan[j] = daftarPasangan[j + 1];
                     daftarPasangan[j + 1] = temp;
                 }
             }
         }
-
-        // 4. Memasukkan hasil urut ke Stack Final (Sesuai Constraint 3)
         Stack<String> finalStack = new Stack<>();
         
-        // Kita looping dari belakang agar data Januari (indeks 0) berada di pucuk Stack (Top)
         for (int i = n - 1; i >= 0; i--) {
             finalStack.push(daftarPasangan[i].getBulan());
             finalStack.push(daftarPasangan[i].getNama());
         }
-
-        // 5. Mengubah isi Stack Final menjadi Array of Strings (Sesuai Constraint 4)
         String[] outputArray = new String[finalStack.size()];
         int outIndex = 0;
         
         while (!finalStack.isEmpty()) {
-            // Karena Januari ada di pucuk, dia akan keluar duluan mengisi array dari indeks 0
             outputArray[outIndex] = finalStack.pop();
             outIndex++;
         }
 
-        // Mencetak hasil akhir
         System.out.println("\nOutput:");
         System.out.println(Arrays.toString(outputArray));
         
