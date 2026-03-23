@@ -51,15 +51,12 @@ public class The_Newly_Born_Law {
                 penjara.push(tersangkaSaatIni);
             }
         }
-        // Menampilkan hasil interogasi
+    
         if (penjara.isEmpty()) {
-            // Perhatikan penggunaan namaDetektif dari input awal
             System.out.println(namaDetektif + " exposed no one.");
         } else {
             System.out.println(namaDetektif + " exposed someone!");
         }
-        
-        // Stack bisa langsung diprint dan otomatis membentuk format [a, b, c]
         System.out.println("Arrested: " + penjara);
 
         sc.close();
